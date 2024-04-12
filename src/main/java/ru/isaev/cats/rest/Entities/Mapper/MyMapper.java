@@ -59,6 +59,19 @@ public class MyMapper implements IMyMapper {
     }
 
     @Override
+    public Set<CatDto> catsSetToCatDtosSet(Set<Cat> setOfCats) {
+        Set<CatDto> setOfCatDtos = new HashSet<>();
+
+        for (Cat cat :
+                setOfCats) {
+            setOfCatDtos.add(catToCatDto(cat));
+        }
+
+        return setOfCatDtos;
+    }
+
+
+    @Override
     public OwnerDto ownerToOwnerDto(Owner owner) {
         if ( owner == null ) {
             return null;

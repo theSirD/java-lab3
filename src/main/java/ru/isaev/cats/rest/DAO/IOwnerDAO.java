@@ -1,17 +1,18 @@
 package ru.isaev.cats.rest.DAO;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import ru.isaev.cats.rest.Entities.Owners.Owner;
 
 import java.util.List;
 
-public interface IOwnerDAO {
-    void add(Owner owner);
-
-    List<Owner> getAll();
-
-    Owner getById(Long id);
-
-    void update(Owner owner);
-
-    void remove(Owner owner);
+public interface IOwnerDAO extends JpaRepository<Owner, Long> {
+//    void add(Owner owner);
+//
+//    List<Owner> getAll();
+//
+//    Owner getById(Long id);
+//
+//    void update(Owner owner);
+//
+//    void remove(Owner owner);
 }

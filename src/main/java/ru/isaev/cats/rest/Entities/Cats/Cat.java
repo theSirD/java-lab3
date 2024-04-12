@@ -25,15 +25,24 @@ public class Cat {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Owner owner;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "cat_friends",
             joinColumns = @JoinColumn(name = "cat_id"),
             inverseJoinColumns = @JoinColumn(name = "friend_id")
+
     )
     private Set<Cat> friendsList = new HashSet<>();
 
     public Cat() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Set<Cat> getFriendsList() {
+        return friendsList;
     }
 
     public Date getBirthday() {

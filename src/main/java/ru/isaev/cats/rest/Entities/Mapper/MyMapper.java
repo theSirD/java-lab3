@@ -2,6 +2,7 @@ package ru.isaev.cats.rest.Entities.Mapper;
 
 import org.springframework.stereotype.Component;
 import ru.isaev.cats.rest.Entities.CatDtos.CatDto;
+import ru.isaev.cats.rest.Entities.CatDtos.CatDtoInput;
 import ru.isaev.cats.rest.Entities.Cats.Cat;
 import ru.isaev.cats.rest.Entities.OwnerDtos.OwnerDto;
 import ru.isaev.cats.rest.Entities.Owners.Owner;
@@ -10,10 +11,7 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Component
 public class MyMapper implements IMyMapper {
@@ -38,7 +36,7 @@ public class MyMapper implements IMyMapper {
         CatDto catDto = new CatDto();
 
         catDto.setId( cat.getId() );
-        catDto.setBirthday( xmlGregorianCalendarToString( dateToXmlGregorianCalendar( cat.getBirthday() ), null ) );
+        catDto.setBirthday( cat.getBirthday()  );
         catDto.setColor( cat.getColor() );
         catDto.setBreed( cat.getBreed() );
         catDto.setOwnerId(cat.getOwner().getId());
@@ -59,45 +57,63 @@ public class MyMapper implements IMyMapper {
     }
 
     @Override
-    public Set<CatDto> catsSetToCatDtosSet(Set<Cat> setOfCats) {
-        Set<CatDto> setOfCatDtos = new HashSet<>();
+    public List<CatDto> mapListOfCatsToListOfDtos(List<Cat> listOfCats) {
+        List<CatDto> listOfCatDtos = new ArrayList<>();
 
         for (Cat cat :
-                setOfCats) {
-            setOfCatDtos.add(catToCatDto(cat));
+                listOfCats) {
+            listOfCatDtos.add(catToCatDto(cat));
         }
 
-        return setOfCatDtos;
+        return listOfCatDtos;
     }
 
-
     @Override
-    public OwnerDto ownerToOwnerDto(Owner owner) {
-        if ( owner == null ) {
+    public Cat catDtoInputToCat(CatDtoInput catDtoInput) {
+        if ( catDtoInput == null ) {
             return null;
         }
 
-        OwnerDto ownerDto = new OwnerDto();
+        Cat cat = new Cat();
 
-        ownerDto.setId(owner.getId());
-        ownerDto.setFirst_name(owner.getFirst_name());
-        ownerDto.setLast_name(owner.getLast_name());
-        ownerDto.setBirthday( xmlGregorianCalendarToString( dateToXmlGregorianCalendar( owner.getBirthday() ), null ) );
+        cat.setId( catDtoInput.getId() );
+        cat.setBirthday( catDtoInput.getBirthday() );
+        cat.setColor( catDtoInput.getColor() );
+        cat.setBreed( catDtoInput.getBreed() );
+        cat.setOwner(null);
+        cat.setFriendsList(null);
 
-//        ownerDto.setCats(owner.getCatsList());
-
-        Set<Cat> catsList = owner.getCatsList();
-        Set<Long> idsOfCats = new HashSet<>();
-
-        for (Cat cat:
-                catsList) {
-            idsOfCats.add(cat.getId());
-        }
-
-        ownerDto.setCats(idsOfCats);
-
-        return ownerDto;
+        return cat;
     }
+
+
+//    @Override
+//    public OwnerDto ownerToOwnerDto(Owner owner) {
+//        if ( owner == null ) {
+//            return null;
+//        }
+//
+//        OwnerDto ownerDto = new OwnerDto();
+//
+//        ownerDto.setId(owner.getId());
+//        ownerDto.setFirst_name(owner.getFirst_name());
+//        ownerDto.setLast_name(owner.getLast_name());
+//        ownerDto.setBirthday( xmlGregorianCalendarToString( dateToXmlGregorianCalendar( owner.getBirthday() ), null ) );
+//
+////        ownerDto.setCats(owner.getCatsList());
+//
+//        Set<Cat> catsList = owner.getCatsList();
+//        Set<Long> idsOfCats = new HashSet<>();
+//
+//        for (Cat cat:
+//                catsList) {
+//            idsOfCats.add(cat.getId());
+//        }
+//
+//        ownerDto.setCats(idsOfCats);
+//
+//        return ownerDto;
+//    }
 
     private String xmlGregorianCalendarToString(XMLGregorianCalendar xcal, String dateFormat ) {
         if ( xcal == null ) {

@@ -18,7 +18,7 @@ public class Owner {
 
     private String last_name;
 
-    private Date birthday;
+    private String birthday;
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -29,6 +29,14 @@ public class Owner {
     private Set<Cat> catsList = new HashSet<>();
 
     public Owner() {
+    }
+
+    public Owner(Long id, String first_name, String last_name, String birthday, Set<Cat> catsList) {
+        this.id = id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.birthday = birthday;
+        this.catsList = catsList;
     }
 
     public Long getId() {
@@ -63,11 +71,11 @@ public class Owner {
         this.last_name = lastName;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 

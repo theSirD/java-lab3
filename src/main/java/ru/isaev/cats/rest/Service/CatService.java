@@ -3,10 +3,16 @@ package ru.isaev.cats.rest.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.isaev.cats.rest.DAO.ICatDAO;
+import ru.isaev.cats.rest.Entities.CatDtos.CatDto;
+import ru.isaev.cats.rest.Entities.CatDtos.CatDtoInput;
 import ru.isaev.cats.rest.Entities.Cats.Cat;
+import ru.isaev.cats.rest.Entities.Cats.CatColors;
+import ru.isaev.cats.rest.Entities.OwnerDtos.OwnerDtoInput;
+import ru.isaev.cats.rest.Entities.Owners.Owner;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class CatService {
@@ -18,18 +24,23 @@ public class CatService {
     }
 
     public void addCat(Cat cat) {
-//        catDAO.add(cat);
-        catDAO.save(cat);
-    }
 
-    public List<Cat> getAllCats() {
-//        return catDAO.getAll();
-        return catDAO.findAll();
+        catDAO.save(cat);
     }
 
     public Optional<Cat> getCatById(Long id) {
 //        return catDAO.getById(id);
         return catDAO.findById(id);
+    }
+
+    public List<Cat> getCatsByColor(CatColors color) {
+//        return catDAO.getById(id);
+        return catDAO.findByColor(color);
+    }
+
+    public List<Cat> getCatsByBreed(String breed) {
+//        return catDAO.getById(id);
+        return catDAO.findByBreed(breed);
     }
 
     public void updateCat(Cat cat) {

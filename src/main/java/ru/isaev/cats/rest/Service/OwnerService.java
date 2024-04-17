@@ -29,7 +29,6 @@ public class OwnerService {
 
     public Optional<Owner> getOwnerById(Long id) {
         return ownerDAO.findById(id);
-
     }
 
     public void updateOwner(Owner owner) {

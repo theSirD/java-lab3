@@ -16,7 +16,7 @@ public class Cat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Date birthday;
+    private String birthday;
 
     private String breed;
 
@@ -41,15 +41,27 @@ public class Cat {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
+
+    public void setFriendsList(Set<Cat> friendsList) {
+        this.friendsList = friendsList;
+    }
+
     public Set<Cat> getFriendsList() {
         return friendsList;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 

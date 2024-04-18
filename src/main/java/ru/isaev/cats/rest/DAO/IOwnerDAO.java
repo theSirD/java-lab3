@@ -7,5 +7,4 @@ import ru.isaev.cats.rest.Entities.Owners.Owner;
 import java.util.List;
 
 public interface IOwnerDAO extends JpaRepository<Owner, Long> {
-    List<Owner> findByName(String name);
 }

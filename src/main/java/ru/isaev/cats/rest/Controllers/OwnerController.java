@@ -12,7 +12,7 @@ import ru.isaev.cats.rest.Service.OwnerService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/owner")
+@RequestMapping("/owners")
 public class OwnerController {
     private final OwnerService ownerService;
 
@@ -32,13 +32,6 @@ public class OwnerController {
         );
     }
 
-    @GetMapping("/name")
-    public ResponseEntity<List<OwnerDto>> getByColor(@RequestParam(name = "name", required = false) String name) {
-        return new ResponseEntity<>(
-                mapper.mapListOfOwnersToListOfDtos(ownerService.getOwnersByName(name)),
-                HttpStatus.OK
-        );
-    }
 
     @PostMapping("/add")
     public ResponseEntity<String> addOwner(@RequestBody OwnerDto ownerDto) {
@@ -48,7 +41,7 @@ public class OwnerController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Owner was added");
     }
 
-    @PostMapping("/add")
+    @PostMapping("/edit")
     public ResponseEntity<String> editOwner(@RequestBody OwnerDto ownerDto) {
         Owner owner = mapper.ownerDtoToOwner(ownerDto);
         ownerService.updateOwner(owner);

@@ -23,10 +23,6 @@ public class OwnerService {
         ownerDAO.save(owner);
     }
 
-    public List<Owner> getOwnersByName(String name) {
-        return ownerDAO.findByName(name);
-    }
-
     public Optional<Owner> getOwnerById(Long id) {
         return ownerDAO.findById(id);
     }

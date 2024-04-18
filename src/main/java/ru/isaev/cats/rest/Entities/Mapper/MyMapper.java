@@ -41,7 +41,6 @@ public class MyMapper implements IMyMapper {
         catDto.setBreed( cat.getBreed() );
         catDto.setOwnerId(cat.getOwner().getId());
 
-//        catDto.setFriends(cat.getFriendsList());
         Set<Cat> listOfFriends = cat.getFriendsList();
         Set<Long> idsOfFriends = new HashSet<>();
 
@@ -99,6 +98,16 @@ public class MyMapper implements IMyMapper {
         ownerDto.setFirst_name( owner.getFirst_name() );
         ownerDto.setLast_name( owner.getLast_name() );
         ownerDto.setId(owner.getId());
+
+        Set<Cat> listOfCats = owner.getCatsList();
+        Set<Long> idsOfcats = new HashSet<>();
+
+        for (Cat cat:
+                listOfCats) {
+            idsOfcats.add(cat.getId());
+        }
+
+        ownerDto.setIdsOfCatsList(idsOfcats);
 
         return ownerDto;
     }

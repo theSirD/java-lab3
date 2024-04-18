@@ -86,6 +86,52 @@ public class MyMapper implements IMyMapper {
         return cat;
     }
 
+    @Override
+    public OwnerDto ownerToOwnerDto(Owner owner) {
+        if ( owner == null ) {
+            return null;
+        }
+
+        OwnerDto ownerDto = new OwnerDto();
+
+        ownerDto.setId( owner.getId() );
+        ownerDto.setBirthday( owner.getBirthday()  );
+        ownerDto.setFirst_name( owner.getFirst_name() );
+        ownerDto.setLast_name( owner.getLast_name() );
+        ownerDto.setId(owner.getId());
+
+        return ownerDto;
+    }
+
+    @Override
+    public List<OwnerDto> mapListOfOwnersToListOfDtos(List<Owner> listOfOwners) {
+        List<OwnerDto> listOfOwnerDtos = new ArrayList<>();
+
+        for (Owner owner :
+                listOfOwners) {
+            listOfOwnerDtos.add(ownerToOwnerDto(owner));
+        }
+
+        return listOfOwnerDtos;
+    }
+
+    @Override
+    public Owner ownerDtoToOwner(OwnerDto ownerDto) {
+        if ( ownerDto == null ) {
+            return null;
+        }
+
+        Owner owner = new Owner(
+                ownerDto.getId(),
+                ownerDto.getFirst_name(),
+                ownerDto.getLast_name(),
+                ownerDto.getBirthday(),
+                null
+        );
+
+        return owner;
+    }
+
 
 //    @Override
 //    public OwnerDto ownerToOwnerDto(Owner owner) {

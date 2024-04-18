@@ -2,6 +2,8 @@ package ru.isaev.cats.rest.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.isaev.cats.rest.Entities.Cats.Cat;
+import ru.isaev.cats.rest.Entities.Cats.CatColors;
 import ru.isaev.cats.rest.Entities.Owners.Owner;
 import ru.isaev.cats.rest.DAO.IOwnerDAO;
 
@@ -18,13 +20,11 @@ public class OwnerService {
     }
 
     public void addOwner(Owner owner) {
-//        ownerDAO.add(owner);
         ownerDAO.save(owner);
     }
 
-    public List<Owner> getAllOwners() {
-//        return ownerDAO.getAll();
-        return ownerDAO.findAll();
+    public List<Owner> getOwnersByName(String name) {
+        return ownerDAO.findByName(name);
     }
 
     public Optional<Owner> getOwnerById(Long id) {
@@ -32,12 +32,10 @@ public class OwnerService {
     }
 
     public void updateOwner(Owner owner) {
-//        ownerDAO.update(owner);
         ownerDAO.save(owner);
     }
 
-    public void removeOwner(Owner owner) {
-//        ownerDAO.remove(owner);
-        ownerDAO.delete(owner);
+    public void removeOwnerById(Long id) {
+        ownerDAO.deleteById(id);
     }
 }

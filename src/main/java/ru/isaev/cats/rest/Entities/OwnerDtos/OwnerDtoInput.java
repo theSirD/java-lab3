@@ -6,7 +6,7 @@ import ru.isaev.cats.rest.Entities.Cats.Cat;
 
 import java.util.Set;
 
-public class OwnerDto {
+public class OwnerDtoInput {
     @JsonProperty("id")
     private Long id;
 
@@ -18,29 +18,6 @@ public class OwnerDto {
 
     @JsonProperty("last_name")
     private String last_name;
-
-    @JsonProperty("idsOfCatsList")
-    private Set<Long> idsOfCatsList;
-
-    public Set<Long> getIdsOfCatsList() {
-        return idsOfCatsList;
-    }
-
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setIdsOfCatsList(Set<Long> idsOfCatsList) {
-        this.idsOfCatsList = idsOfCatsList;
-    }
-
-    public void setCats(Set<Long> cats) {
-        this.idsOfCatsList = cats;
-    }
 
     public Long getId() {
         return id;
@@ -58,9 +35,16 @@ public class OwnerDto {
         this.birthday = birthday;
     }
 
+    public String getFirst_name() {
+        return first_name;
+    }
 
     public void setFirst_name(String first_name) {
         this.first_name = first_name;
+    }
+
+    public String getLast_name() {
+        return last_name;
     }
 
     public void setLast_name(String last_name) {

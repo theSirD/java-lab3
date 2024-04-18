@@ -16,7 +16,9 @@ public interface IMyMapper {
 
     Cat catDtoInputToCat(CatDtoInput catDtoInput);
 
-//    List<Cat> mapListOfDtosToListOfCats(List<CatDto> listOfCats);
+    OwnerDto ownerToOwnerDto(Owner owner);
 
-//    OwnerDto ownerToOwnerDto(Owner owner);
+    List<OwnerDto> mapListOfOwnersToListOfDtos(List<Owner> listOfOwners);
+
+    Owner ownerDtoToOwner(OwnerDto ownerDto);
 }

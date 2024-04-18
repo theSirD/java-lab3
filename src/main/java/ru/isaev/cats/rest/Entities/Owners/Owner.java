@@ -55,16 +55,8 @@ public class Owner {
         return catsList;
     }
 
-    public String getFirstName() {
-        return first_name;
-    }
-
     public void setFirstName(String firstName) {
         this.first_name = firstName;
-    }
-
-    public String getLastName() {
-        return last_name;
     }
 
     public void setLastName(String lastName) {

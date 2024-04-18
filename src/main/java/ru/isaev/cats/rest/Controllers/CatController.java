@@ -12,7 +12,6 @@ import ru.isaev.cats.rest.Entities.Mapper.IMyMapper;
 import ru.isaev.cats.rest.Service.CatService;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/cats")
@@ -58,6 +57,22 @@ public class CatController {
         catService.addCat(cat);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Cat was added");
+    }
+
+    @PutMapping("/edit")
+    public ResponseEntity<String> editCat(@RequestBody CatDtoInput catDtoInput) {
+        //{"id":1,"birthday":"3100-10-04","color":"Red","breed":"breed3"}
+        Cat cat = mapper.catDtoInputToCat(catDtoInput);
+        catService.updateCat(cat);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body("Cat was edited");
+    }
+
+    @PutMapping("/delete/{id}")
+    public ResponseEntity<String> deleteCatById(@PathVariable Long id) {
+        catService.removeCatById(id);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body("Cat was deleted");
     }
 }
 

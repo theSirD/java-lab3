@@ -29,27 +29,26 @@ public class CatService {
     }
 
     public Optional<Cat> getCatById(Long id) {
-//        return catDAO.getById(id);
         return catDAO.findById(id);
     }
 
     public List<Cat> getCatsByColor(CatColors color) {
-//        return catDAO.getById(id);
         return catDAO.findByColor(color);
     }
 
     public List<Cat> getCatsByBreed(String breed) {
-//        return catDAO.getById(id);
         return catDAO.findByBreed(breed);
     }
 
     public void updateCat(Cat cat) {
-//        catDAO.update(cat);
         catDAO.save(cat);
     }
 
     public void removeCat(Cat cat) {
-//        catDAO.remove(cat);
         catDAO.delete(cat);
+    }
+
+    public void removeCatById(Long id) {
+        catDAO.deleteById(id);
     }
 }

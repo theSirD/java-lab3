@@ -9,8 +9,6 @@ import ru.isaev.cats.rest.Entities.OwnerDtos.OwnerDto;
 import ru.isaev.cats.rest.Entities.Owners.Owner;
 import ru.isaev.cats.rest.Service.OwnerService;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/owners")
 public class OwnerController {
@@ -49,7 +47,7 @@ public class OwnerController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Owner was edited");
     }
 
-    @PutMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteOwnerById(@PathVariable Long id) {
         ownerService.removeOwnerById(id);
 

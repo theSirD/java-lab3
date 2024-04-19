@@ -52,7 +52,6 @@ public class CatController {
 
     @PostMapping("/add")
     public ResponseEntity<String> addCat(@RequestBody CatDtoInput catDtoInput) {
-        //{"id":1,"birthday":"3100-10-04","color":"Red","breed":"breed3"}
         Cat cat = mapper.catDtoInputToCat(catDtoInput);
         catService.addCat(cat);
 
@@ -61,14 +60,13 @@ public class CatController {
 
     @PutMapping("/edit")
     public ResponseEntity<String> editCat(@RequestBody CatDtoInput catDtoInput) {
-        //{"id":1,"birthday":"3100-10-04","color":"Red","breed":"breed3"}
         Cat cat = mapper.catDtoInputToCat(catDtoInput);
         catService.updateCat(cat);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Cat was edited");
     }
 
-    @PutMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteCatById(@PathVariable Long id) {
         catService.removeCatById(id);
 

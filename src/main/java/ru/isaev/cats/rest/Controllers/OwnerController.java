@@ -9,6 +9,8 @@ import ru.isaev.cats.rest.Entities.OwnerDtos.OwnerDto;
 import ru.isaev.cats.rest.Entities.Owners.Owner;
 import ru.isaev.cats.rest.Service.OwnerService;
 
+import java.util.NoSuchElementException;
+
 @RestController
 @RequestMapping("/owners")
 public class OwnerController {
@@ -24,10 +26,18 @@ public class OwnerController {
 
     @GetMapping("/{id}")
     public ResponseEntity<OwnerDto> getById(@PathVariable Long id) {
-        return new ResponseEntity<>(
-                mapper.ownerToOwnerDto(ownerService.getOwnerById(id).get()),
-                HttpStatus.OK
-        );
+        try {
+            return new ResponseEntity<>(
+                    mapper.ownerToOwnerDto(ownerService.getOwnerById(id).get()),
+                    HttpStatus.OK
+            );
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(
+                    new OwnerDto(),
+                    HttpStatus.NO_CONTENT
+            );
+        }
+
     }
 
 
@@ -44,14 +54,14 @@ public class OwnerController {
         Owner owner = mapper.ownerDtoToOwner(ownerDto);
         ownerService.updateOwner(owner);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("Owner was edited");
+        return ResponseEntity.status(HttpStatus.OK).body("Owner was edited");
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteOwnerById(@PathVariable Long id) {
         ownerService.removeOwnerById(id);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("Owner was deleted");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Owner was deleted");
     }
 }
 

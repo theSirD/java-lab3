@@ -6,9 +6,6 @@ import ru.isaev.cats.rest.Entities.Owners.Owner;
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
-
-//@Getter
-//@Setter
 @Entity
 @Table(name = "CATS")
 public class Cat {
@@ -16,8 +13,9 @@ public class Cat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //TODO localedate
     private String birthday;
-
+    //TODO enum
     private String breed;
 
     private CatColors color;

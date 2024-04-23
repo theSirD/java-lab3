@@ -28,6 +28,7 @@ public class CatService {
         catDAO.save(cat);
     }
 
+    //TODO 20.4.24. advicecontroller
     public Optional<Cat> getCatById(Long id) {
         return catDAO.findById(id);
     }

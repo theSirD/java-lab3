@@ -1,121 +1,62 @@
-//import org.hibernate.Session;
-//import org.hibernate.SessionFactory;
-//import org.hibernate.Transaction;
-//import org.junit.Before;
-//import org.junit.Test;
-//import org.mockito.Mock;
-//import org.mockito.MockitoAnnotations;
-//import ru.isaev.DAO.CatDAO;
-//import ru.isaev.Entities.Cats.Cat;
-//import ru.isaev.Entities.Cats.CatColors;
-//
-//import java.sql.Date;
-//import java.util.Calendar;
-//
-//import static org.mockito.Mockito.verify;
-//import static org.mockito.Mockito.when;
-//
-//public class Tests {
-//    @Mock
-//    private SessionFactory sessionFactory;
-//
-//    @Mock
-//    private Session session;
-//
-//    @Mock
-//    private Transaction transaction;
-//
-//    private CatDAO catDAO;
-//
-//    @Before
-//    public void setUp() {
-//        MockitoAnnotations.initMocks(this);
-//        catDAO = new CatDAO(sessionFactory);
-//    }
-//
-//
-//    @Test
-//    public void testAddCat() {
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.set(2000, Calendar.SEPTEMBER, 9);
-//        Cat testCat = new Cat();
-//        testCat.setBreed("breed1");
-//        testCat.setColor(CatColors.Red);
-//        testCat.setBirthday(new Date(calendar.getTime().getTime()));
-//
-//        when(sessionFactory.openSession()).thenReturn(session);
-//        when(session.beginTransaction()).thenReturn(transaction);
-//
-//        catDAO.add(testCat);
-//
-//        verify(session).persist(testCat);
-//        verify(transaction).commit();
-//        verify(session).close();
-//
-//        sessionFactory.close();
-//    }
-//
-//    @Test
-//    public void testGetCat() {
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.set(2000, Calendar.SEPTEMBER, 9);
-//        Cat testCat = new Cat();
-//        testCat.setBreed("breed1");
-//        testCat.setColor(CatColors.Red);
-//        testCat.setBirthday(new Date(calendar.getTime().getTime()));
-//
-//        when(sessionFactory.openSession()).thenReturn(session);
-//        when(session.beginTransaction()).thenReturn(transaction);
-//
-//        catDAO.getById(1L);
-//
-//        verify(session).find(Cat.class, 1L);
-//        verify(transaction).commit();
-//        verify(session).close();
-//
-//        sessionFactory.close();
-//    }
-//
-//    @Test
-//    public void testUpdateCat() {
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.set(2000, Calendar.SEPTEMBER, 9);
-//        Cat testCat = new Cat();
-//        testCat.setBreed("breed1");
-//        testCat.setColor(CatColors.Red);
-//        testCat.setBirthday(new Date(calendar.getTime().getTime()));
-//
-//        when(sessionFactory.openSession()).thenReturn(session);
-//        when(session.beginTransaction()).thenReturn(transaction);
-//
-//        catDAO.update(testCat);
-//
-//        verify(session).update(testCat);
-//        verify(transaction).commit();
-//        verify(session).close();
-//
-//        sessionFactory.close();
-//    }
-//
-//    @Test
-//    public void testDeleteCat() {
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.set(2000, Calendar.SEPTEMBER, 9);
-//        Cat testCat = new Cat();
-//        testCat.setBreed("breed1");
-//        testCat.setColor(CatColors.Red);
-//        testCat.setBirthday(new Date(calendar.getTime().getTime()));
-//
-//        when(sessionFactory.openSession()).thenReturn(session);
-//        when(session.beginTransaction()).thenReturn(transaction);
-//
-//        catDAO.remove(testCat);
-//
-//        verify(session).remove(testCat);
-//        verify(transaction).commit();
-//        verify(session).close();
-//
-//        sessionFactory.close();
-//    }
-//
-//}
+package ru.isaev.cats.rest;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
+import ru.isaev.cats.rest.DAO.ICatDAO;
+import ru.isaev.cats.rest.DAO.IOwnerDAO;
+import ru.isaev.cats.rest.Entities.Cats.Cat;
+import ru.isaev.cats.rest.Entities.Cats.CatColors;
+import ru.isaev.cats.rest.Entities.Owners.Owner;
+import ru.isaev.cats.rest.Service.CatService;
+import ru.isaev.cats.rest.Service.OwnerService;
+
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.when;
+
+
+//TODO тесты для контроллеров
+public class Tests {
+    @Mock
+    private ICatDAO catDAO;
+
+    @InjectMocks
+    private CatService catService;
+
+    @Mock
+    private IOwnerDAO ownerDAO;
+
+    @InjectMocks
+    private OwnerService ownerService;
+
+    @Test
+    public void testGetCat() {
+        Cat cat = new Cat();
+        cat.setBirthday("2004-10-12");
+        cat.setBreed("Test Breed");
+        cat.setColor(CatColors.Black);
+
+        when(catDAO.findById(1L)).thenReturn(Optional.of(cat));
+
+        Optional<Cat> catFromDb = catService.getCatById(1L);
+
+        assertNotNull(catFromDb);
+    }
+
+    @Test
+    public void testGetOwner() {
+        Owner owner = new Owner();
+        owner.setBirthday("2000-10-12");
+        owner.setFirstName("Daniel");
+        owner.setLastName("Isaev");
+
+        when(ownerDAO.findById(1L)).thenReturn(Optional.of(owner));
+
+        Optional<Owner> ownerFromDb = ownerService.getOwnerById(1L);
+
+        assertNotNull(ownerFromDb);
+    }
+}

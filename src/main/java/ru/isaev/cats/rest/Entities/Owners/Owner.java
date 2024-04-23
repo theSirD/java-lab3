@@ -18,6 +18,7 @@ public class Owner {
 
     private String last_name;
 
+    //TODO localedate
     private String birthday;
 
     @OneToMany(fetch = FetchType.EAGER)
@@ -39,6 +40,7 @@ public class Owner {
         this.catsList = catsList;
     }
 
+
     public Long getId() {
         return id;
     }
@@ -53,6 +55,10 @@ public class Owner {
 
     public Set<Cat> getCatsList() {
         return catsList;
+    }
+
+    public void setCatsList(Set<Cat> catsList) {
+        this.catsList = catsList;
     }
 
     public void setFirstName(String firstName) {

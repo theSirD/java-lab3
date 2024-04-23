@@ -16,7 +16,7 @@ public class Cat {
     //TODO localedate
     private String birthday;
     //TODO enum
-    private String breed;
+    private CatBreeds breed;
 
     private CatColors color;
 
@@ -63,11 +63,11 @@ public class Cat {
         this.birthday = birthday;
     }
 
-    public String getBreed() {
+    public CatBreeds getBreed() {
         return breed;
     }
 
-    public void setBreed(String breed) {
+    public void setBreed(CatBreeds breed) {
         this.breed = breed;
     }
 

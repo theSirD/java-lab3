@@ -6,6 +6,7 @@ import ru.isaev.cats.rest.DAO.ICatDAO;
 import ru.isaev.cats.rest.Entities.CatDtos.CatDto;
 import ru.isaev.cats.rest.Entities.CatDtos.CatDtoInput;
 import ru.isaev.cats.rest.Entities.Cats.Cat;
+import ru.isaev.cats.rest.Entities.Cats.CatBreeds;
 import ru.isaev.cats.rest.Entities.Cats.CatColors;
 import ru.isaev.cats.rest.Entities.OwnerDtos.OwnerDtoInput;
 import ru.isaev.cats.rest.Entities.Owners.Owner;
@@ -37,7 +38,7 @@ public class CatService {
         return catDAO.findByColor(color);
     }
 
-    public List<Cat> getCatsByBreed(String breed) {
+    public List<Cat> getCatsByBreed(CatBreeds breed) {
         return catDAO.findByBreed(breed);
     }
 

@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import ru.isaev.cats.rest.DAO.ICatDAO;
 import ru.isaev.cats.rest.DAO.IOwnerDAO;
 import ru.isaev.cats.rest.Entities.Cats.Cat;
+import ru.isaev.cats.rest.Entities.Cats.CatBreeds;
 import ru.isaev.cats.rest.Entities.Cats.CatColors;
 import ru.isaev.cats.rest.Entities.Owners.Owner;
 import ru.isaev.cats.rest.Service.CatService;
@@ -36,7 +37,7 @@ public class Tests {
     public void testGetCat() {
         Cat cat = new Cat();
         cat.setBirthday("2004-10-12");
-        cat.setBreed("Test Breed");
+        cat.setBreed(CatBreeds.BREED3);
         cat.setColor(CatColors.Black);
 
         when(catDAO.findById(1L)).thenReturn(Optional.of(cat));

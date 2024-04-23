@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.isaev.cats.rest.Entities.CatDtos.CatDto;
 import ru.isaev.cats.rest.Entities.CatDtos.CatDtoInput;
 import ru.isaev.cats.rest.Entities.Cats.Cat;
+import ru.isaev.cats.rest.Entities.Cats.CatBreeds;
 import ru.isaev.cats.rest.Entities.Cats.CatColors;
 import ru.isaev.cats.rest.Entities.Mapper.IMyMapper;
 import ru.isaev.cats.rest.Service.CatService;
@@ -43,7 +44,7 @@ public class CatController {
     }
 
     @GetMapping("/breed")
-    public ResponseEntity<List<CatDto>> getByBreed(@RequestParam(name = "breed", required = false) String breed) {
+    public ResponseEntity<List<CatDto>> getByBreed(@RequestParam(name = "breed", required = false) CatBreeds breed) {
         return new ResponseEntity<>(
                 mapper.mapListOfCatsToListOfDtos(catService.getCatsByBreed(breed)),
                 HttpStatus.OK

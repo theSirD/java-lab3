@@ -1,6 +1,7 @@
 package ru.isaev.cats.rest.Entities.CatDtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import ru.isaev.cats.rest.Entities.Cats.CatBreeds;
 import ru.isaev.cats.rest.Entities.Cats.CatColors;
 
 public class CatDtoInput {
@@ -14,7 +15,7 @@ public class CatDtoInput {
     private CatColors color;
 
     @JsonProperty("breed")
-    private String breed;
+    private CatBreeds breed;
 
 
     public Long getId() {
@@ -41,11 +42,11 @@ public class CatDtoInput {
         this.color = color;
     }
 
-    public String getBreed() {
+    public CatBreeds getBreed() {
         return breed;
     }
 
-    public void setBreed(String breed) {
+    public void setBreed(CatBreeds breed) {
         this.breed = breed;
     }
 

@@ -2,6 +2,7 @@ package ru.isaev.cats.rest.Entities.CatDtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.isaev.cats.rest.Entities.Cats.Cat;
+import ru.isaev.cats.rest.Entities.Cats.CatBreeds;
 import ru.isaev.cats.rest.Entities.Cats.CatColors;
 
 import java.util.HashSet;
@@ -21,7 +22,7 @@ public class CatDto {
     private CatColors color;
 
     @JsonProperty("breed")
-    private String breed;
+    private CatBreeds breed;
 
     @JsonProperty("idsOfFriendsList")
     private Set<Long> friends;
@@ -58,11 +59,11 @@ public class CatDto {
         this.color = color;
     }
 
-    public String getBreed() {
+    public CatBreeds getBreed() {
         return breed;
     }
 
-    public void setBreed(String breed) {
+    public void setBreed(CatBreeds breed) {
         this.breed = breed;
     }
 
